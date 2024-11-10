@@ -1,4 +1,5 @@
-﻿using Library.Models;
+﻿using Library.Dto;
+using Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,43 +17,91 @@ using System.Windows.Shapes;
 
 namespace Library
 {
-    /// <summary>
-    /// Interaction logic for SearchBook.xaml
-    /// </summary>
-    public partial class SearchBook : Window
+    public partial class SearchBook : Page
     {
-        private LibraryContext _context;
+        private readonly LibraryContext _context;
         public SearchBook()
         {
             InitializeComponent();
             _context = new LibraryContext();
+            LoadCategories();
+            LoadData();
         }
 
         private void LoadData()
         {
-            var books = _context.Books.ToList();
+            var books = _context.Books
+        .Select(b => new BookViewModel
+        {
+            CategoryName = b.Category.Name,  // Giả sử b.Category là navigation property
+            Title = b.Title,
+            AuthorName = b.Author.Name       // Giả sử b.Author là navigation property
+        })
+        .ToList();
+
+            // Gán danh sách kết quả vào ItemsSource của DataGrid
             dgResults.ItemsSource = books;
 
-            var categories = _context.Categories.ToList();
-            cbCategory.ItemsSource = categories;
+
 
         }
 
         private void LoadCategories()
         {
+            cbCategory.Items.Clear();
             var categories = _context.Categories.ToList();
+            categories.Insert(0, new Category { CategoryId = 0, Name = "Tất cả các thể loại" });
 
-            var allCategoriesItem = new Category
-            {
-                Name = "Tất cả thể loại",
-                CategoryId = 0
-            };
-            categories.Insert(0, allCategoriesItem);
             cbCategory.ItemsSource = categories;
+            cbCategory.SelectedIndex = 0; // Tùy chọn mặc định là "Tất cả các thể loại"
         }
 
         private void cbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var selectedCategory = cbCategory.SelectedItem as Category;
+            var keyWord = txtSearch.Text;
+
+            if (selectedCategory != null)
+            {
+                List<BookViewModel> books;
+
+                if (selectedCategory.CategoryId == 0)
+                {
+                    // Nếu chọn "Tất cả thể loại", hiển thị tất cả sách
+                    books = _context.Books
+                        .Select(b => new BookViewModel
+                        {
+                            CategoryName = b.Category.Name,
+                            Title = b.Title,
+                            AuthorName = b.Author.Name
+                        })
+                        .ToList();
+                }
+                else
+                {
+                    // Chỉ hiển thị sách thuộc thể loại được chọn
+                    books = _context.Books
+                        .Where(b => b.CategoryId == selectedCategory.CategoryId)
+                        .Select(b => new BookViewModel
+                        {
+                            CategoryName = b.Category.Name,
+                            Title = b.Title,
+                            AuthorName = b.Author.Name
+                        })
+                        .ToList();
+                }
+
+                // Áp dụng tìm kiếm nếu có từ khóa
+                if (!string.IsNullOrEmpty(keyWord))
+                {
+                    books = books
+                        .Where(b => b.Title.Contains(keyWord, StringComparison.CurrentCultureIgnoreCase))
+                        .ToList();
+                }
+
+                // Gán danh sách kết quả cho dgResults
+                dgResults.ItemsSource = books;
+            }
 
         }
 
@@ -63,7 +112,66 @@ namespace Library
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var selectedCategory = cbCategory.SelectedItem as Category;
+            var keyWord = txtSearch.Text;
 
+            if (selectedCategory != null)
+            {
+                List<BookViewModel> books;
+
+                if (selectedCategory.CategoryId == 0)
+                {
+                    // Nếu chọn "Tất cả thể loại", hiển thị tất cả sách
+                    books = _context.Books
+                        .Select(b => new BookViewModel
+                        {
+                            CategoryName = b.Category.Name,  // Giả sử b.Category là navigation property
+                            Title = b.Title,
+                            AuthorName = b.Author.Name       // Giả sử b.Author là navigation property
+                        })
+                        .ToList();
+                }
+                else
+                {
+                    // Chỉ hiển thị sách thuộc thể loại được chọn
+                    books = _context.Books
+                        .Where(b => b.CategoryId == selectedCategory.CategoryId)
+                        .Select(b => new BookViewModel
+                        {
+                            CategoryName = b.Category.Name,
+                            Title = b.Title,
+                            AuthorName = b.Author.Name
+                        })
+                        .ToList();
+                }
+
+                // Áp dụng tìm kiếm theo từ khóa nếu có
+                if (!string.IsNullOrEmpty(keyWord))
+                {
+                    books = books
+                        .Where(b => b.Title.Contains(keyWord, StringComparison.CurrentCultureIgnoreCase))
+                        .ToList();
+                    if (books.Count > 0)
+                    {
+                        MessageBox.Show("Không có cuốn sách nào được tìm kiếm");
+                    }
+                }
+
+                // Gán danh sách kết quả cho DataGrid
+                dgResults.ItemsSource = books;
+            }
+        }
+
+        private void dgResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedBook = dgResults.SelectedItem as BookViewModel;
+
+            if (selectedBook != null)
+            {
+                // Mở cửa sổ hoặc trang mới để hiển thị chi tiết sách
+                var bookDetailWindow = new BookInformation(selectedBook);
+                bookDetailWindow.Show();
+            }
         }
     }
 }

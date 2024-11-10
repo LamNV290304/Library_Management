@@ -4481,11 +4481,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\Downloads\\PRN212\\Library\\Library.csproj",
+      "projectUniqueName": "D:\\PRN212\\Library\\Library.csproj",
       "projectName": "Library",
-      "projectPath": "C:\\Users\\admin\\Downloads\\PRN212\\Library\\Library.csproj",
+      "projectPath": "D:\\PRN212\\Library\\Library.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\Downloads\\PRN212\\Library\\obj\\",
+      "outputPath": "D:\\PRN212\\Library\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
