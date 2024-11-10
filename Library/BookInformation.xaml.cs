@@ -21,20 +21,24 @@ namespace Library
     /// </summary>
     public partial class BookInformation : Page
     {
+        private readonly LibraryContext _context;
         public BookInformation(BookViewModel selectionBook)
         {
             InitializeComponent();
+            BookSelection(selectionBook.Title);
 
         }
 
-        private Book BookSelection(int selectionBookId)
+        private void BookSelection(string selectionBookTitle)
         {
-
-        }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-        
+            var book = _context.Books.FirstOrDefault(b => b.Title.Equals(selectionBookTitle, StringComparison.OrdinalIgnoreCase));
+            txtTitle.Text = book.Title;
+            txtPublisher.Text = book.Publisher.Name;
+            txtPublicationYear.Text = book.PublicationYear.ToString();
+            txtCategory.Text = book.Category.Name;
+            txtTotalCopies.Text = book.TotalCopies.ToString();
+            txtAvailableCopies.Text = book.AvailableCopies.ToString();
+            txtPrice.Text = book.Price.ToString();
         }
     }
 }

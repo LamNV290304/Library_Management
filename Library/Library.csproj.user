@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AddLoan.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="BookInformation.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -14,6 +17,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ManageLoan.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Register.xaml.cs">
@@ -30,10 +36,16 @@
     <Page Update="BookLoaned.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="AddLoan.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Login.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ManageLoan.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Register.xaml">

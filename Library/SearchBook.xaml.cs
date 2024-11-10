@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 
 namespace Library
 {
+    /// <summary>
+    /// Interaction logic for SearchBook.xaml
+    /// </summary>
     public partial class SearchBook : Page
     {
         private readonly LibraryContext _context;
@@ -172,6 +175,11 @@ namespace Library
                 var bookDetailWindow = new BookInformation(selectedBook);
                 bookDetailWindow.Show();
             }
+        }
+
+        private void dgResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

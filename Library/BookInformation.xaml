@@ -21,10 +21,10 @@
                    FontWeight="Bold" 
                    HorizontalAlignment="Center" 
                    Foreground="#333" 
-                   Margin="0,150,0,176" Grid.Row="1"/>
+                   Margin="0,121,0,205" Grid.Row="1"/>
 
         <!-- Book Information Fields -->
-        <Border Grid.Row="1" Background="White" CornerRadius="10" Padding="20" BorderBrush="#DDD" BorderThickness="1" Margin="0,205,0,0">
+        <Border Grid.Row="1" Background="White" CornerRadius="10" Padding="20" BorderBrush="#DDD" BorderThickness="1" Margin="0,175,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

@@ -4,21 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library"
+        WindowState="Maximized"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <Grid>
         <!-- Welcome Text -->
         <TextBlock x:Name="WelcomeTextBlock" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0" Text="Welcome, Guest!" />
 
+        <!-- StackPanel for buttons -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0">
-            <!-- Visibility of these buttons can be controlled based on user login status -->
+            <!-- Manage Book, Loan, Reservation, User buttons will be shown/hidden based on login status -->
             <Button x:Name="btnManageBook" Content="Manage Book" Margin="10" Visibility="Collapsed"/>
-            <Button x:Name="btnManageLoan" Content="Manage Loan" Margin="10" Visibility="Collapsed"/>
+            <Button x:Name="btnManageLoan" Content="Manage Loan" Margin="10" Visibility="Collapsed" Click="btnManageLoan_Click"/>
             <Button x:Name="btnManageReservation" Content="Manage Reservation" Margin="10" Visibility="Collapsed"/>
             <Button x:Name="btnManageUser" Content="Manage User" Margin="10" Visibility="Collapsed"/>
-            <Button x:Name="btnLogin" Content="Login" Margin="10" Click="Login_Click"/>
-            <Button x:Name="btnRegister" Content="Register" Margin="10" Click="Register_Click"/>
+
+            <!-- Login and Register buttons -->
+            <Button x:Name="btnLogin" Content="Login" Margin="10" Click="Login_Click" />
+            <Button x:Name="btnRegister" Content="Register" Margin="10" Click="Register_Click" />
+
+            <!-- Logout button -->
             <Button x:Name="btnLogout" Content="Logout" Margin="10" Click="Logout_Click" Visibility="Collapsed"/>
         </StackPanel>
-        </Grid>
-    </Window>
+
+        <!-- Frame to display pages after login (like SearchBook) -->
+        <Frame x:Name="MainContentFrame" Margin="10,160,10,10" NavigationUIVisibility="Hidden" />
+    </Grid>
+</Window>
