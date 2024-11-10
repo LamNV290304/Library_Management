@@ -19,7 +19,7 @@ namespace Library
     /// <summary>
     /// Interaction logic for SearchBook.xaml
     /// </summary>
-    public partial class SearchBook : Window
+    public partial class SearchBook : Page
     {
         private LibraryContext _context;
         public SearchBook()
@@ -62,6 +62,11 @@ namespace Library
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void dgResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

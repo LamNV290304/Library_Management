@@ -1,17 +1,7 @@
 ﻿using Library.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Library
 {
@@ -22,9 +12,8 @@ namespace Library
     {
         private LibraryContext context = new LibraryContext();
 
-        // Properties to pass username and role to the MainWindow after successful login
-        public string UserName { get; private set; } = string.Empty;
-        public string Role { get; private set; } = string.Empty;
+        // Property to return the full User object after a successful login
+        public User? LoggedInUser { get; private set; } // Changed to nullable
 
         public Login()
         {
@@ -48,12 +37,9 @@ namespace Library
 
             if (user != null)
             {
-                // Set the properties to pass to MainWindow
-                UserName = user.Username;
-                Role = user.Role;
-
-                // Indicate success and close the login window
-                DialogResult = true;
+                // Set the LoggedInUser to the User object
+                LoggedInUser = user;
+                DialogResult = true;  // Indicate successful login
                 Close();
             }
             else

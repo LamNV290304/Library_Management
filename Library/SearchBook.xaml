@@ -47,7 +47,7 @@
                 </Grid>
 
                 <!-- Khu vực hiển thị kết quả tìm kiếm -->
-                <DataGrid x:Name="dgResults" Height="200" Margin="0,20,0,0" AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True" CanUserAddRows="False">
+                <DataGrid x:Name="dgResults" Height="200" Margin="0,20,0,0" AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True" CanUserAddRows="False" SelectionChanged="dgResults_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
                         <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="*"/>
