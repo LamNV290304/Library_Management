@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\admin\Downloads\PRN212\Library\obj\Debug\net8.0-windows\
+D:\PRN212\Library\obj\Debug\net8.0-windows\
 Library
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\admin\Downloads\PRN212\Library\App.xaml
-41158558283
+D:\PRN212\Library\App.xaml
+61450107682
 
-17-1804766255
+201006767111
 244-551279404
-Login.xaml;MainWindow.xaml;Register.xaml;SearchBook.xaml;
+BookInformation.xaml;BookLoaned.xaml;Login.xaml;MainWindow.xaml;Register.xaml;SearchBook.xaml;
 
 True
 
